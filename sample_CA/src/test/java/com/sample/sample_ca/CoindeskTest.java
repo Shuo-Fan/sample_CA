@@ -5,8 +5,7 @@ import com.sample.sample_ca.controller.CurrencyController;
 import com.sample.sample_ca.entity.CurrencyChineseNameData;
 import com.sample.sample_ca.entity.CurrencyData;
 import com.sample.sample_ca.service.CurrencyService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -17,6 +16,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 public class CoindeskTest {
 
@@ -39,6 +39,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫查詢幣別對應表資料 API
      */
+    @Order(1)
     @Test
     public void testGetCurrencyChineseNameData() throws IOException {
 
@@ -83,6 +84,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫新增幣別對應表資料 API
      */
+    @Order(2)
     @Test
     public void testInsertCurrencyChineseNameData() {
 
@@ -96,7 +98,7 @@ public class CoindeskTest {
         currencyController.saveCurrencyChineseData(expected);
 
         CurrencyChineseNameData actual = new CurrencyChineseNameData();
-        actual = currencyService.getCurrencyChineseNameData(4);
+        actual = currencyService.getCurrencyChineseNameData(7);
 
         assertEquals(expected.get(0).getCurrencyCode(), actual.getCurrencyCode());
         assertEquals(expected.get(0).getCodeName(), actual.getCodeName());
@@ -106,6 +108,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫更新幣別對應表資料 API
      */
+    @Order(3)
     @Test
     public void testUpdateCurrencyChineseNameData() {
 
@@ -131,6 +134,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫刪除幣別對應表資料 API
      */
+    @Order(4)
     @Test
     public void testDeleteCurrencyChineseNameData() {
 
@@ -147,6 +151,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫 coindesk API，並顯示其內容。
      */
+    @Order(5)
     @Test
     public void testGetCoindeskData() {
 
@@ -170,6 +175,7 @@ public class CoindeskTest {
     /**
      * 測試呼叫資料轉換的 API，並顯示其內容
      */
+    @Order(6)
     @Test
     public void testGetCurrencyData() {
 
